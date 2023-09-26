@@ -48,7 +48,7 @@ export default async function ChainPage({ params }: ChainPageProps) {
           </h4>
         </a>
       </div>
-      <div className="w-full px-5">
+      <div className="z-10 max-w-5xl w-full px-5">
         <h2 className={`mb-3 text-2xl font-semibold`}>Tokens</h2>
       </div>
       <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
