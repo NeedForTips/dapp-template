@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 type TokenConfig = {
   tokenType: string
   chainInfo: {
@@ -17,10 +19,12 @@ async function getTokens(chain: {type: string, id: number}) {
   )
   const data = await res.json() as { [symbol: string]: TokenConfig[] }
   return Object.values(data)
-		.reduce((prev, current) => {
-			return [...prev, ...current]
-		}, [])
-		.filter((token) => token.chainInfo.chainType === chain.type && token.chainInfo.chainId === chain.id)
+    .reduce((prev, current) => {
+      return [...prev, ...current]
+    }, [])
+    .filter((token) =>
+      token.chainInfo.chainType === chain.type && token.chainInfo.chainId === chain.id
+    )
 }
 
 type ChainPageProps = {
@@ -35,7 +39,7 @@ export default async function ChainPage({ params }: ChainPageProps) {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-       <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex px-5 py-4">
+      <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex px-5 py-4">
        <a
           href="../"
           className="group rounded-lg border border-transparent px-4 py-2 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
@@ -48,10 +52,10 @@ export default async function ChainPage({ params }: ChainPageProps) {
           </h4>
         </a>
       </div>
-      <div className="z-10 max-w-5xl w-full px-5">
+      <div className="z-10 text-center max-w-5xl w-full px-5">
         <h2 className={`mb-3 text-2xl font-semibold`}>Tokens</h2>
       </div>
-      <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
+      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
         {tokens?.map((token) => {
           return <Token key={token.tokenType} token={token} />
         })}
