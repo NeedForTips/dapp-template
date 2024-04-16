@@ -1,41 +1,32 @@
 export const runtime = 'edge';
 
-type TokenConfig = {
-  tokenType: string
-  chainInfo: {
-    chainType: string
-    chainId: number
-  }
-  contractAddress: string
-  symbol: string
-  decimals: number
-}
+import { NetworkBase, NetworkCurrency, NetworkType } from "@/models/network";
 
-async function getTokens(chain: {type: string, id: number}) {
+async function getTokens(network: NetworkBase) {
   const res = await fetch(
     // 'https://bridge.api.alphacarbon.network/secure/bridge/public/tokens',
     'https://banq.api.alphacarbon.network/secure/external/tokens',
     { cache: 'no-store' }
   )
-  const data = await res.json() as { [symbol: string]: TokenConfig[] }
+  const data = await res.json() as { [symbol: string]: NetworkCurrency[] }
   return Object.values(data)
     .reduce((prev, current) => {
       return [...prev, ...current]
     }, [])
     .filter((token) =>
-      token.chainInfo.chainType === chain.type && token.chainInfo.chainId === chain.id
+      token.chainInfo.chainType === network.chainType && token.chainInfo.chainId === network.chainId
     )
 }
 
-type ChainPageProps = {
+type NetworkPageProps = {
   params: {
     slug: string[]
   }
 }
 
-export default async function ChainPage({ params }: ChainPageProps) {
-  const chain = {type: params.slug[0], id: Number(params.slug[1])}
-  const tokens = await getTokens(chain)
+export default async function NetworkPage({ params }: NetworkPageProps) {
+  const network = {chainType: params.slug[0] as NetworkType, chainId: Number(params.slug[1])}
+  const tokens = await getTokens(network)
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
@@ -66,7 +57,7 @@ export default async function ChainPage({ params }: ChainPageProps) {
 
 type TokenProps = {
   key: string
-  token: TokenConfig
+  token: NetworkCurrency
 }
 
 function Token({token}: TokenProps) {

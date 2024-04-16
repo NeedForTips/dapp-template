@@ -1,26 +1,19 @@
 export const runtime = 'edge';
 
-type ChainConfig = {
-  chainType: string
-  chainId: number
-  name: string
-  currencySymbol: string
-  blockExplorerUrl: string
-  rpcUrl: string
-}
+import { CryptoNetwork } from "@/models/network";
 
-async function getChains() {
+async function getNetworks() {
   const res = await fetch(
     // 'https://bridge.api.alphacarbon.network/secure/bridge/public/chains',
     'https://banq.api.alphacarbon.network/secure/external/chains',
     { cache: 'no-store' }
   );
   const data = await res.json()
-  return data as ChainConfig[]
+  return data as CryptoNetwork[]
 }
 
-export default async function ChainsPage() {
-  const chains = await getChains()
+export default async function NetworksPage() {
+  const networks = await getNetworks()
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
@@ -38,34 +31,34 @@ export default async function ChainsPage() {
         </a>
       </div>
       <div className="z-10 text-center max-w-5xl w-full px-5">
-        <h2 className={`mb-3 text-2xl font-semibold`}>Chains</h2>
+        <h2 className={`mb-3 text-2xl font-semibold`}>Networks</h2>
       </div>
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        {chains?.map((chain) => {
-          return <Chain key={`${chain.chainType}-${chain.chainId}`} chain={chain} />
+        {networks?.map((network) => {
+          return <Network key={`${network.chainType}-${network.chainId}`} network={network} />
         })}
       </div>
     </main>
   )
 }
 
-type ChainProps = {
+type NetworkProps = {
   key: string
-  chain: ChainConfig
+  network: CryptoNetwork
 }
 
-function Chain({chain}: ChainProps) {
+function Network({network}: NetworkProps) {
   return (
     <a
-      href={`/chains/${chain.chainType}/${chain.chainId}`}
+      href={`/networks/${network.chainType}/${network.chainId}`}
       className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
     >
-      <h3 className="mb-3 text-xl font-medium">{chain.name}</h3>
-      <h4 className="text-sm font-mono">{chain.chainType}</h4>
-      <h4 className="text-sm font-mono">{chain.chainId}</h4>
-      <h4 className="text-sm font-mono">{chain.currencySymbol}</h4>
-      <h4 className="text-sm font-mono">{chain.blockExplorerUrl}</h4>
-      <h4 className="text-sm font-mono">{chain.rpcUrl}</h4>
+      <h3 className="mb-3 text-xl font-medium">{network.name}</h3>
+      <h4 className="text-sm font-mono">{network.chainType}</h4>
+      <h4 className="text-sm font-mono">{network.chainId}</h4>
+      <h4 className="text-sm font-mono">{network.currencySymbol}</h4>
+      <h4 className="text-sm font-mono">{network.blockExplorerUrl}</h4>
+      <h4 className="text-sm font-mono">{network.rpcUrl}</h4>
     </a>
   )
 }
