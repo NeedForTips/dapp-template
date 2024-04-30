@@ -1,6 +1,7 @@
 export const runtime = 'edge';
 
 import { NetworkBase, NetworkCurrency, NetworkType } from "@/models/network";
+import { shortenHash } from "@/utils/shorten";
 
 async function getTokens(network: NetworkBase) {
   const res = await fetch(
@@ -66,7 +67,7 @@ function Token({token}: TokenProps) {
       className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
     >
       <h3 className="mb-3 text-xl font-medium">{token.tokenType}</h3>
-      <h4 className="text-sm font-mono">{token.contractAddress}</h4>
+      <h4 className="text-sm font-mono">{shortenHash(token.contractAddress)}</h4>
       <h4 className="text-sm font-mono">{token.symbol}</h4>
       <h4 className="text-sm font-mono">{token.decimals}</h4>
     </div>
