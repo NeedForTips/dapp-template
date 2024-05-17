@@ -1,6 +1,7 @@
 export const runtime = 'edge';
 
-import { CryptoNetwork } from "@/models/network";
+import ConnectButton from '@/components/connectButton';
+import { CryptoNetwork } from '@/models/network';
 
 async function getNetworks() {
   const res = await fetch(
@@ -8,12 +9,12 @@ async function getNetworks() {
     'https://banq.api.alphacarbon.network/secure/external/chains',
     { cache: 'no-store' }
   );
-  const data = await res.json()
-  return data as CryptoNetwork[]
+  const data = await res.json();
+  return data as CryptoNetwork[];
 }
 
 export default async function NetworksPage() {
-  const networks = await getNetworks()
+  const networks = await getNetworks();
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
@@ -25,29 +26,35 @@ export default async function NetworksPage() {
           <h4 className={`font-semibold`}>
             <span className="inline-block transition-transform group-hover:-translate-x-1 motion-reduce:transform-none">
               &lt;-
-            </span>
-            {' '}Back
+            </span>{' '}
+            Back
           </h4>
         </a>
+        <ConnectButton />
       </div>
       <div className="z-10 text-center max-w-5xl w-full px-5">
         <h2 className={`mb-3 text-2xl font-semibold`}>Networks</h2>
       </div>
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
         {networks?.map((network) => {
-          return <Network key={`${network.chainType}-${network.chainId}`} network={network} />
+          return (
+            <Network
+              key={`${network.chainType}-${network.chainId}`}
+              network={network}
+            />
+          );
         })}
       </div>
     </main>
-  )
+  );
 }
 
 type NetworkProps = {
-  key: string
-  network: CryptoNetwork
-}
+  key: string;
+  network: CryptoNetwork;
+};
 
-function Network({network}: NetworkProps) {
+function Network({ network }: NetworkProps) {
   return (
     <a
       href={`/networks/${network.chainType}/${network.chainId}`}
@@ -60,5 +67,5 @@ function Network({network}: NetworkProps) {
       <h4 className="text-sm font-mono">{network.blockExplorerUrl}</h4>
       <h4 className="text-sm font-mono">{network.rpcUrl}</h4>
     </a>
-  )
+  );
 }
