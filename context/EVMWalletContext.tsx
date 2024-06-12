@@ -35,11 +35,6 @@ interface Actions {
 
 type ContextType = [Data, Actions];
 
-interface TRONActions {
-  connect?: () => void;
-  disconnect?: () => void;
-}
-
 const WalletContext = createContext<ContextType | null>(null);
 
 function WalletProvider({ children }: { children: React.ReactNode }) {

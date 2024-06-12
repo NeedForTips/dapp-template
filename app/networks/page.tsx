@@ -1,6 +1,6 @@
 export const runtime = 'edge';
 
-import ConnectButton from '@/components/connectButton';
+import ConnectButton, { WalletActionButton } from '@/components/connectButton';
 import { CryptoNetwork } from '@/models/network';
 
 async function getNetworks() {
@@ -30,7 +30,10 @@ export default async function NetworksPage() {
             Back
           </h4>
         </a>
-        <ConnectButton />
+        <div className="items-center lg:flex">
+          <ConnectButton />
+          <WalletActionButton />
+        </div>
       </div>
       <div className="z-10 text-center max-w-5xl w-full px-5">
         <h2 className={`mb-3 text-2xl font-semibold`}>Networks</h2>

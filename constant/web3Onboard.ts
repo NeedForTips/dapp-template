@@ -65,6 +65,7 @@ const web3Onboard = init({
   connect: {
     // showSidebar: false,
   },
+  theme: 'system',
 });
 
 export default web3Onboard;

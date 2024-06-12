@@ -12,6 +12,10 @@
     "cfpages:deploy": "CLOUDFLARE_ACCOUNT_ID=cd89b98a834e3cd8d4d162e894cfc675 npx wrangler pages deploy .vercel/output/static --project-name dapp-template"
   },
   "dependencies": {
+    "@tronweb3/tronwallet-abstract-adapter": "^1.1.6",
+    "@tronweb3/tronwallet-adapter-react-hooks": "^1.1.7",
+    "@tronweb3/tronwallet-adapter-react-ui": "^1.1.8",
+    "@tronweb3/tronwallet-adapters": "^1.2.1",
     "@types/node": "20.6.0",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
@@ -21,7 +25,7 @@
     "autoprefixer": "10.4.15",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
-    "next": "^14.1.0",
+    "next": "14.2.3",
     "postcss": "8.4.29",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -29,7 +33,8 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.6.0",
+    "@cloudflare/next-on-pages": "^1.11.3",
+    "pino-pretty": "^11.1.0",
     "vercel": "^32.2.1"
   }
 }
