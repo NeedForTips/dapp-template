@@ -18,7 +18,7 @@ export default async function NetworksPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between text-sm px-5 py-4 lg:flex">
+      <div className="max-w-5xl w-full items-center justify-between text-sm px-5 py-4 lg:flex">
         <a
           href="../"
           className="group rounded-lg border border-transparent px-4 py-2 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
@@ -30,12 +30,12 @@ export default async function NetworksPage() {
             Back
           </h4>
         </a>
-        <div className="items-center lg:flex">
+        <div className="items-center flex">
           <ConnectButton />
           <WalletActionButton />
         </div>
       </div>
-      <div className="z-10 text-center max-w-5xl w-full px-5">
+      <div className="text-center max-w-5xl w-full px-5">
         <h2 className={`mb-3 text-2xl font-semibold`}>Networks</h2>
       </div>
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">

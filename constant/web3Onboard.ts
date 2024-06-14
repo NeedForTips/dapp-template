@@ -63,7 +63,18 @@ const web3Onboard = init({
     // agreement?: TermsOfServiceAgreementOptions | null;
   },
   connect: {
-    // showSidebar: false,
+    showSidebar: false,
+    // autoConnectLastWallet: true,
+  },
+  accountCenter: {
+    desktop: {
+      enabled: true,
+      position: 'topRight',
+    },
+    mobile: {
+      enabled: true,
+      position: 'topRight',
+    },
   },
   theme: 'system',
 });
